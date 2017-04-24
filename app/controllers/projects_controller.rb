@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
-    @tasks = Task.find(:all, :conditions => ['project_id = ? AND complete = ?', @project.id, false])
+    @tasks = @project.tasks.find_all_by_complete(false)
   end
 end
