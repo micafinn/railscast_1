@@ -1,10 +1,9 @@
 class TasksController < ApplicationController
   def incomplete
-    @tasks = Task.find(:all, :conditions => ['complete = ?', false])
-    @tasks
+    @tasks = Task.find_all_by_complete(false)
   end
 
   def last_incomplete
-    @task = Task.find(:first, :conditions => ['complete = ?', false], :order => 'create_at Desc')
+    @task = Task.find_by_complete(false, :order => 'create_at DESC')
   end
 end
