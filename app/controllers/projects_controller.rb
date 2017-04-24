@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  layout "admim"
+  layout "admin"
   def show
     @project = Project.find(params[:id])
     @tasks = @project.tasks.find_incomplete :limit => 20
