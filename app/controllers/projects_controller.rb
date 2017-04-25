@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
   layout :user_layout
 
+  def index
+    @project = Project.find(params[:id])
+    render :layout => 'projects'
+  end
+
   def show
     @project = Project.find(params[:id])
     @tasks = @project.tasks.find_incomplete :limit => 20
