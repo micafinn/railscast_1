@@ -3,18 +3,13 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   fixtures :users
 
-  def test_full_name_without_middle_initial
-    user = User.new(:first_name => 'John', :last_name => 'Doe')
-    assert_equal 'John Doe', user.full_name
+  def test_full_name
+    assert_equal 'John Doe', user.full_name('John', nil, 'Doe')
+    assert_equal 'John H. Doe', user.full_name('John', 'H', 'Doe')
+    assert_equal 'John H. Doe', user.full_name('John', '', 'Doe')
   end
 
-  def test_full_name_with_middle_initial
-    user = User.new(:first_name => 'John', :middle_initial =>'H', :last_name => 'Doe')
-    assert_equal 'John H. Doe', user.full_name
-  end
-
-  def test_full_name_with_blank_middle_initial
-    user = User.new(:first_name => 'John', :middle_initial =>'', :last_name => 'Doe')
-    assert_equal 'John H. Doe', user.full_name
+  def full_name(first, middle, last)
+    User.new(:first_name => first, :middle_initial => middle, :last_name => last).full_name
   end
 end
