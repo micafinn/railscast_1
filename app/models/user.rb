@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  validates_presence_of :name
 
   def full_name
     [first_name, middle_initial_with period, last_name].compact.join(' ')

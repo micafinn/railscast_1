@@ -3,17 +3,18 @@ class UsersController < ApplicationController
   end
 
   def prepare
-    session[:user] = User.find(:first)
+    session[:user_id] = User.find(:first).id
     redirect_to :action => 'show'
   end
 
   def show
-    @user = session[:user]
+    @user = User.find(session[:user_id])
   end
 
   def update
-    @user = session[:user]
-    @user.name = "Foo"
-    redirect_to :action => 'show' 
+    @user = User.find(session[:user_id])
+    @user.name = ""
+    @user.valid?
+    redirect_to :action => 'show'
   end
 end
